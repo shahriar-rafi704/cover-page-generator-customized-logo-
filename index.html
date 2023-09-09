@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Page Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        #input-form {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center; /* Center the input form */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left; /* Align labels to the left */
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #generate-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #generate-btn:hover {
+            background-color: #45a049;
+        }
+
+        #cover-page {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center; /* Center the cover page content */
+        }
+
+        img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .assignment-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center; /* Center the title */
+        }
+
+        p {
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center; /* Center all paragraphs */
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        /* Set A4 page size for printing */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="input-form">
+        <h1>Cover Page Generator</h1>
+        <div class="form-group">
+            <label for="assignment-name">Assignment Name:</label>
+            <input type="text" id="assignment-name">
+        </div>
+        <div class="form-group">
+            <label for="course-code">Course Code:</label>
+            <input type="text" id="course-code">
+        </div>
+        <div class="form-group">
+            <label for="course-title">Course Title:</label>
+            <input type="text" id="course-title">
+        </div>
+        <div class="form-group">
+            <label for="student-name">Name:</label>
+            <input type="text" id="student-name">
+        </div>
+        <div class="form-group">
+            <label for="student-id">Student ID:</label>
+            <input type="text" id="student-id">
+        </div>
+        <div class="form-group">
+            <label for="section">Section:</label>
+            <input type="text" id="section">
+        </div>
+        <div class="form-group">
+            <label for="submitted-to">Submitted To:</label>
+            <input type="text" id="submitted-to">
+        </div>
+        <div class="form-group">
+            <label for="logo">Logo:</label>
+            <input type="file" id="logo">
+        </div>
+        <button id="generate-btn">Generate Cover Page</button>
+    </div>
+    <div id="cover-page">
+        <img id="cover-logo" src="logo.png" alt="Logo">
+        <h1 class="assignment-title"></h1>
+        <p><strong>Course Code:</strong></p>
+        <p><strong>Course Title:</strong></p>
+        <p><strong>Name:</strong></p>
+        <p><strong>Student ID:</strong></p>
+        <p><strong>Section:</strong></p>
+        <p><strong>Submitted To:</strong></p>
+    </div>
+    <script>
+        const inputForm = document.getElementById("input-form");
+        const generateBtn = document.getElementById("generate-btn");
+        const coverLogo = document.getElementById("cover-logo");
+
+        generateBtn.addEventListener("click", function () {
+            const assignmentName = document.getElementById("assignment-name").value;
+            const courseCode = document.getElementById("course-code").value;
+            const courseTitle = document.getElementById("course-title").value;
+            const studentName = document.getElementById("student-name").value;
+            const studentId = document.getElementById("student-id").value;
+            const section = document.getElementById("section").value;
+            const submittedTo = document.getElementById("submitted-to").value;
+            const logoFile = document.getElementById("logo").files[0]; // Get the selected logo file
+
+            const newTab = window.open("", "_blank");
+            newTab.document.open();
+            newTab.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Cover Page</title>
+                    <style>
+                        /* Your cover page styles here */
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f1f1f1;
+                            text-align: center;
+                        }
+
+                        #cover-page {
+                            background-color: #fff;
+                            padding: 20px;
+                            margin: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                            max-width: 800px;
+                            margin: 20px auto;
+                        }
+
+                        #cover-logo {
+                            max-width: 100px;
+                            display: block;
+                            margin: 0 auto;
+                        }
+
+                        .assignment-title {
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin: 20px 0;
+                            text-align: center; /* Center the title */
+                        }
+
+                        p {
+                            margin: 10px 0;
+                            font-weight: bold;
+                            text-align: center; /* Center all paragraphs */
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div id="cover-page">
+                        <img src="${URL.createObjectURL(logoFile)}" alt="Logo">
+                        <h1 class="assignment-title">${assignmentName}</h1>
+                        <p><strong>Course Code:</strong> ${courseCode}</p>
+                        <p><strong>Course Title:</strong> ${courseTitle}</p>
+                        <p><strong>Name:</strong> ${studentName}</p>
+                        <p><strong>Student ID:</strong> ${studentId}</p>
+                        <p><strong>Section:</strong> ${section}</p>
+                        <p><strong>Submitted To:</strong> ${submittedTo}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            newTab.document.close();
+        });
+    </script>
+</body>
+</html>
